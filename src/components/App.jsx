@@ -1,5 +1,4 @@
 import { Component } from 'react';
-import PropTypes from 'prop-types';
 import Section from './Section';
 import FeedbackOptions from './FeedbackOptions';
 import Statistics from './Statistics';
@@ -7,18 +6,10 @@ import Notification from './Notification';
 import { countTotalFeedback, countPositiveFeedbackPercentage } from '../js';
 
 export class App extends Component {
-  static defaultProps = {
-    initialValue: 0,
-  };
-
-  static propTypes = {
-    initialValue: PropTypes.number.isRequired,
-  };
-
   state = {
-    good: this.props.initialValue,
-    neutral: this.props.initialValue,
-    bad: this.props.initialValue,
+    good: 0,
+    neutral: 0,
+    bad: 0,
   };
 
   onLeaveFeedback = e => {
@@ -37,7 +28,7 @@ export class App extends Component {
       <div>
         <Section title="Please leave feedback">
           <FeedbackOptions
-            options={['good', 'neutral', 'bad']}
+            options={Object.keys(this.state)}
             onLeaveFeedback={this.onLeaveFeedback}
           />
         </Section>
